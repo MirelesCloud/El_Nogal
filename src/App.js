@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Card, CardText, CardBody } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 
@@ -50,8 +50,14 @@ function App() {
               </Form>
             </div>
             <div className="col-md-6 col-sm-12 my-4">
-              <h2>{(result).toFixed(1)} {" "} inches per acre</h2>
-              <h2>{(acreFeet).toFixed(1)} {" "} acre/feet</h2>
+              <Card body inverse color="success">
+                <CardBody >
+                  <CardText>
+                    <h2>{(result).toFixed(1)} {" "} inches per acre</h2>
+                    <h2>{(acreFeet).toFixed(1)} {" "} acre/feet</h2>
+                  </CardText>
+                </CardBody>
+              </Card>
             </div>
           </div>
       </div>
@@ -107,9 +113,16 @@ function CanalPump() {
                 <Button onClick={calculateTotal}>Calculate</Button>
               </Form>
             </div>
-            <div className="col-md-6 col-sm-12 my-4">
-              <h2>{(result).toFixed(1)} {" "} inches per acre</h2>
-              <h2>{(acreFeet).toFixed(1)} {" "} acre/feet</h2>
+            <div className="col-md-6 col-sm-12 my-5">
+             <Card body inverse color="warning">
+               <CardBody >
+                 <CardText>
+                  <h2>{(result).toFixed(1)} {" "} inches per acre</h2>
+                  <h2>{(acreFeet).toFixed(1)} {" "} acre/feet</h2>
+                 </CardText>
+               </CardBody>
+             </Card>
+              
             </div>
           </div>
       </div>
