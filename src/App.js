@@ -21,7 +21,7 @@ function App() {
   }
 
   return (
-    <>
+    <div style={{minHeight: "100vh", overflow: "hidden", display: "block", position: "relative", paddingBottom: "100px"}}>
       <div className="jumbotron" style={{background: "linear-gradient(to bottom, #00cc00 0%, #006600 100%)"}}>
         <div className="container">
           <div className="text-center">
@@ -57,8 +57,12 @@ function App() {
       </div>
       <hr/>
       <CanalPump/>
-      
-    </>
+      <footer className="bg-secondary text-white" style={{bottom: "0", position: "absolute", width: "100%"}}>
+        <div class="footer-copyright text-center py-3">© 2019 Copyright - {" "}
+          <a href="https://mirelescloud.com"><span className="text-white">MirelesCloud</span></a>
+        </div>
+      </footer>
+    </div>
    
   );
 }
