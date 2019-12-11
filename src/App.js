@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import { Button, Form, FormGroup, Label, Input, Card, CardText, CardBody } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Card, CardText, CardBody, Badge } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 
@@ -20,9 +20,19 @@ function App() {
     }
   }
 
+  const clearValues = () => {
+    setmeterStart("")
+    setmeterEnd("")
+    setAcres("")
+    
+  }
+
   return (
     <div style={{minHeight: "100vh", overflow: "hidden", display: "block", position: "relative", paddingBottom: "100px"}}>
-      <div className="jumbotron" style={{background: "linear-gradient(to bottom, #00cc00 0%, #006600 100%)"}}>
+      <div className="jumbotron" style={{
+        background: "linear-gradient(to bottom, #00cc00 0%, #006600 100%)",
+        boxShadow: "3px 3px 2px 1px rgba(0, 0 , 0, .3)"
+        }}>
         <div className="container">
           <div className="text-center">
           <h1 className="text-uppercase text-white">El Nogal Irrigation Meter</h1>
@@ -30,27 +40,34 @@ function App() {
         </div>
         </div>
         <div className="container">
-        <h2>El Nogal Pump</h2>
+        <h1><Badge color="secondary">El Nogal Pump</Badge></h1>
           <div className="row justify-content-center">
             <div className="col-md-4 col-sm-12 my-4">
-              <Form>
-                <FormGroup>
-                  <Label for="meterStart">Meter Start</Label>
-                  <Input type="number" name="meterStart" placeholder="Meter Starting Value" value={meterStart} onChange={e => setmeterStart(e.target.value)}/>
-                </FormGroup>
-                <FormGroup>
-                  <Label for="meterEnd">Meter End</Label>
-                  <Input type="number" name="meterEnd" placeholder="Meter Ending Value" value={meterEnd} onChange={e => setmeterEnd(e.target.value)} />
-                </FormGroup>
-                <FormGroup>
-                  <Label for="acres">Acres</Label>
-                  <Input type="number" name="acres" placeholder="Acres Irrigated" value={acres} onChange={e => setAcres(e.target.value)}/>
-                </FormGroup>
-                <Button onClick={calculateTotal}>Calculate</Button>
-              </Form>
+            <Card>
+                <CardBody>
+                  <Form>
+                    <FormGroup>
+                      <Label for="meterStart">Meter Start</Label>
+                      <Input type="number" name="meterStart" placeholder="Meter Starting Value" value={meterStart} onChange={e => setmeterStart(e.target.value)}/>
+                    </FormGroup>
+                    <FormGroup>
+                      <Label for="meterEnd">Meter End</Label>
+                      <Input type="number" name="meterEnd" placeholder="Meter Ending Value" value={meterEnd} onChange={e => setmeterEnd(e.target.value)} />
+                    </FormGroup>
+                    <FormGroup>
+                      <Label for="acres">Acres</Label>
+                      <Input type="number" name="acres" placeholder="Acres Irrigated" value={acres} onChange={e => setAcres(e.target.value)}/>
+                    </FormGroup>
+                    <Button onClick={calculateTotal}>Calculate</Button>{" "}
+                    <Button onClick={clearValues}>Clear</Button>
+                  </Form>
+                </CardBody>
+            </Card>
             </div>
             <div className="col-md-6 col-sm-12 my-4">
-              <Card body inverse color="success">
+              <Card body inverse color="success" style={{
+                boxShadow: "4px 4px 2px 1px rgba(0, 0 , 0, .2)"
+              }}>
                 <CardBody >
                   <CardText>
                     <h2>{(result).toFixed(1)} {" "} inches per acre</h2>
@@ -91,30 +108,44 @@ function CanalPump() {
     
   }
 
+  const clearValues = () => {
+    setmeterStart("")
+    setmeterEnd("")
+    setAcres("")
+    
+  }
+
   return (
     <>
       <div className="container">
-        <h2>Canal Pump</h2>
+        <h1><Badge color="secondary">Canal Pump</Badge></h1>
           <div className="row justify-content-center">
             <div className="col-md-4 col-sm-12 my-4">
-              <Form>
-                <FormGroup>
-                  <Label for="meterStart">Meter Start</Label>
-                  <Input type="number" name="meterStart" placeholder="Meter Starting Value" value={meterStart} onChange={e => setmeterStart(e.target.value)}/>
-                </FormGroup>
-                <FormGroup>
-                  <Label for="meterEnd">Meter End</Label>
-                  <Input type="number" name="meterEnd" placeholder="Meter Ending Value" value={meterEnd} onChange={e => setmeterEnd(e.target.value)} />
-                </FormGroup>
-                <FormGroup>
-                  <Label for="acres">Acres</Label>
-                  <Input type="number" name="acres" placeholder="Acres Irrigated" value={acres} onChange={e => setAcres(e.target.value)}/>
-                </FormGroup>
-                <Button onClick={calculateTotal}>Calculate</Button>
-              </Form>
+              <Card>
+                <CardBody>
+                  <Form>
+                    <FormGroup>
+                      <Label for="meterStart">Meter Start</Label>
+                      <Input type="number" name="meterStart" placeholder="Meter Starting Value" value={meterStart} onChange={e => setmeterStart(e.target.value)}/>
+                    </FormGroup>
+                    <FormGroup>
+                      <Label for="meterEnd">Meter End</Label>
+                      <Input type="number" name="meterEnd" placeholder="Meter Ending Value" value={meterEnd} onChange={e => setmeterEnd(e.target.value)} />
+                    </FormGroup>
+                    <FormGroup>
+                      <Label for="acres">Acres</Label>
+                      <Input type="number" name="acres" placeholder="Acres Irrigated" value={acres} onChange={e => setAcres(e.target.value)}/>
+                    </FormGroup>
+                    <Button onClick={calculateTotal}>Calculate</Button>{" "}
+                    <Button onClick={clearValues}>Clear</Button>
+                  </Form>
+                </CardBody>
+            </Card>
             </div>
             <div className="col-md-6 col-sm-12 my-5">
-             <Card body inverse color="warning">
+             <Card body inverse color="warning" style={{
+                boxShadow: "4px 4px 2px 1px rgba(0, 0 , 0, .2)"
+              }}>
                <CardBody >
                  <CardText>
                   <h2>{(result).toFixed(1)} {" "} inches per acre</h2>
@@ -122,7 +153,6 @@ function CanalPump() {
                  </CardText>
                </CardBody>
              </Card>
-              
             </div>
           </div>
       </div>
