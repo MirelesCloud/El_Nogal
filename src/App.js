@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import { Button, Form, FormGroup, Label, Input, Card, CardText, CardBody, Badge } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Card, CardText, CardBody, CardHeader, CardFooter } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 
@@ -16,7 +16,7 @@ function App() {
     }
     else {
       setResult(((meterEnd-meterStart)*(12/100))/acres)
-      setacreFeet((meterEnd-meterStart)*(.01))
+      setacreFeet((meterEnd-meterStart)*(12/100))
     }
   }
 
@@ -40,10 +40,10 @@ function App() {
         </div>
         </div>
         <div className="container">
-        <h1><Badge color="secondary">El Nogal Pump</Badge></h1>
           <div className="row justify-content-center">
             <div className="col-md-4 col-sm-12 my-4">
             <Card>
+              <CardHeader tag="h3">El Nogal Pump</CardHeader>
                 <CardBody>
                   <Form>
                     <FormGroup>
@@ -58,14 +58,15 @@ function App() {
                       <Label for="acres">Acres</Label>
                       <Input type="number" name="acres" placeholder="Acres Irrigated" value={acres} onChange={e => setAcres(e.target.value)}/>
                     </FormGroup>
+                    
+                  </Form>
                     <Button onClick={calculateTotal}>Calculate</Button>{" "}
                     <Button onClick={clearValues}>Clear</Button>
-                  </Form>
                 </CardBody>
             </Card>
             </div>
             <div className="col-md-6 col-sm-12 my-4">
-              <Card body inverse color="success" style={{
+              <Card style={{
                 boxShadow: "4px 4px 2px 1px rgba(0, 0 , 0, .2)"
               }}>
                 <CardBody >
@@ -74,6 +75,7 @@ function App() {
                     <h2>{(acreFeet).toFixed(1)} {" "} acre/feet</h2>
                   </CardText>
                 </CardBody>
+                <CardFooter className="text-muted">Meter Reading in Acre-Feet x .01: Water Pumped, Ac-In = (Ending Meter Reading - Beginning Meter Reading) x 12/100 - Divide by acres in field to get inches applied per acre</CardFooter>
               </Card>
             </div>
           </div>
@@ -103,7 +105,7 @@ function CanalPump() {
     }
     else {
       setResult(((meterEnd-meterStart)*(12/1000))/acres)
-      setacreFeet((meterEnd-meterStart)*(.001))
+      setacreFeet((meterEnd-meterStart)*(12/1000))
     }
     
   }
@@ -112,16 +114,15 @@ function CanalPump() {
     setmeterStart("")
     setmeterEnd("")
     setAcres("")
-    
   }
 
   return (
     <>
       <div className="container">
-        <h1><Badge color="secondary">Canal Pump</Badge></h1>
           <div className="row justify-content-center">
             <div className="col-md-4 col-sm-12 my-4">
               <Card>
+              <CardHeader tag="h3">Canal Pump</CardHeader>
                 <CardBody>
                   <Form>
                     <FormGroup>
@@ -143,7 +144,7 @@ function CanalPump() {
             </Card>
             </div>
             <div className="col-md-6 col-sm-12 my-5">
-             <Card body inverse color="warning" style={{
+             <Card style={{
                 boxShadow: "4px 4px 2px 1px rgba(0, 0 , 0, .2)"
               }}>
                <CardBody >
@@ -152,6 +153,8 @@ function CanalPump() {
                   <h2>{(acreFeet).toFixed(1)} {" "} acre/feet</h2>
                  </CardText>
                </CardBody>
+               <CardFooter className="text-muted">Meter Reading in Acre-Feet x .001: Water Pumped, Ac-In = (Ending Meter Reading - Beginning Meter Reading) x 12/1000 - Divide by acres in field to get inches applied per acre</CardFooter>
+
              </Card>
             </div>
           </div>
