@@ -12,6 +12,7 @@ function App() {
   const [acres, setAcres] = useState("")
   const [result, setResult] = useState(0)
   const [acreFeet, setacreFeet] = useState(0)
+  const [acreInches, setAcreInches] = useState(0)
 
   const toggle = tab => {
     if(activeTab !== tab) setActiveTab(tab);
@@ -23,7 +24,8 @@ function App() {
     }
     else {
       setResult(((meterEnd-meterStart)*(12/100))/acres)
-      setacreFeet((meterEnd-meterStart)*(12/100))
+      setAcreInches((meterEnd-meterStart)*(12/100))
+      setacreFeet((meterEnd-meterStart)*(.01))
     }
   }
 
@@ -32,6 +34,8 @@ function App() {
     setmeterEnd("")
     setAcres("")
   }
+
+  let gallons = 325851
 
   return (
     <div style={{minHeight: "100vh", overflow: "hidden", display: "block", position: "relative", paddingBottom: "100px"}}>
@@ -96,8 +100,10 @@ function App() {
                 }}>
                   <CardBody >
                     <CardText>
-                      <h2>{(result).toFixed(1)} {" "} inches per acre</h2>
+                      <h2>{(result).toFixed(2)} {" "} inches per acre</h2>
                       <h2>{(acreFeet).toFixed(1)} {" "} acre/feet</h2>
+                      <h2>{(acreInches).toFixed(1)}{" "} acre/inches</h2>
+                      <h2>{(acreFeet*gallons).toFixed(0).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')} gallons</h2>
                     </CardText>
                   </CardBody>
                   <CardFooter className="text-muted">Meter Reading in Acre-Feet x .01: Water Pumped, Ac-In = (Ending Meter Reading - Beginning Meter Reading) x 12/100 - Divide by acres in field to get inches applied per acre</CardFooter>
@@ -124,7 +130,8 @@ function CanalPump() {
   const [meterEnd, setmeterEnd] = useState("")
   const [acres, setAcres] = useState("")
   const [result, setResult] = useState(0)
-  const [acreFeet, setacreFeet] = useState(0)
+  const [acreFeet, setAcreFeet] = useState(0)
+  const [acreInches, setAcreInches] = useState(0)
   const calculateTotal = () => {
     if (isNaN(acres)) {
       setResult("")
@@ -132,7 +139,8 @@ function CanalPump() {
     }
     else {
       setResult(((meterEnd-meterStart)*(12/1000))/acres)
-      setacreFeet((meterEnd-meterStart)*(12/1000))
+      setAcreFeet((meterEnd-meterStart)*(.001))
+      setAcreInches((meterEnd-meterStart)*(12/1000))
     }
   }
 
@@ -141,6 +149,8 @@ function CanalPump() {
     setmeterEnd("")
     setAcres("")
   }
+
+  let gallons = 325851
 
   return (
     <>
@@ -176,6 +186,8 @@ function CanalPump() {
               <CardText>
               <h2>{(result).toFixed(1)} {" "} inches per acre</h2>
               <h2>{(acreFeet).toFixed(1)} {" "} acre/feet</h2>
+              <h2>{(acreInches).toFixed(1)} {" "} acre/inches</h2>
+              <h2>{(acreFeet*gallons).toFixed(0).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')} gallons</h2>
               </CardText>
             </CardBody>
             <CardFooter className="text-muted">Meter Reading in Acre-Feet x .001: Water Pumped, Ac-In = (Ending Meter Reading - Beginning Meter Reading) x 12/1000 - Divide by acres in field to get inches applied per acre</CardFooter>
