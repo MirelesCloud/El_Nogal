@@ -1,6 +1,24 @@
 import React, { useState } from 'react';
 import './App.css';
-import { Button, Form, FormGroup, Label, Input, Card, CardText, CardBody, CardHeader, CardFooter, TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
+import { 
+  Button, 
+  Form, FormGroup, 
+  Label, 
+  Input, 
+  Card,
+  CardTitle,
+  CardText, 
+  CardBody, 
+  CardHeader, 
+  CardFooter, 
+  TabContent, 
+  TabPane, 
+  Nav, 
+  NavItem, 
+  NavLink, 
+  Row, 
+  Col 
+} from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import classnames from 'classnames';
 
@@ -12,7 +30,6 @@ function App() {
   const [acres, setAcres] = useState("")
   const [result, setResult] = useState(0)
   const [acreFeet, setacreFeet] = useState(0)
-  const [acreInches, setAcreInches] = useState(0)
 
   const toggle = tab => {
     if(activeTab !== tab) setActiveTab(tab);
@@ -23,9 +40,8 @@ function App() {
       setResult("")
     }
     else {
-      setResult(((meterEnd-meterStart)*(12/100))/acres)
-      setAcreInches((meterEnd-meterStart)*(12/100))
-      setacreFeet((meterEnd-meterStart)*(.01))
+      setResult(((meterEnd-meterStart)*(12/1000))/acres)
+      setacreFeet((meterEnd-meterStart)*(.001))
     }
   }
 
@@ -34,8 +50,6 @@ function App() {
     setmeterEnd("")
     setAcres("")
   }
-
-  let gallons = 325851
 
   return (
     <div style={{minHeight: "100vh", overflow: "hidden", display: "block", position: "relative", paddingBottom: "100px"}}>
@@ -99,14 +113,10 @@ function App() {
                   boxShadow: "4px 4px 2px 1px rgba(0, 0 , 0, .2)"
                 }}>
                   <CardBody >
-                    <CardText>
-                      <h2>{(result).toFixed(2)} {" "} inches per acre</h2>
-                      <h2>{(acreFeet).toFixed(1)} {" "} acre/feet</h2>
-                      <h2>{(acreInches).toFixed(1)}{" "} acre/inches</h2>
-                      <h2>{(acreFeet*gallons).toFixed(0).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')} gallons</h2>
-                    </CardText>
+                    <h4>{(result).toFixed(2)} {" "} inches per acre </h4>
+                    <h4>{(acreFeet).toFixed(1)} {" "} acre/feet</h4>
                   </CardBody>
-                  <CardFooter className="text-muted">Meter Reading in Acre-Feet x .01: Water Pumped, Ac-In = (Ending Meter Reading - Beginning Meter Reading) x 12/100 - Divide by acres in field to get inches applied per acre</CardFooter>
+                  <CardFooter className="text-muted">Meter Reading in Acre-Feet x .001: Water Pumped, Ac-In = (Ending Meter Reading - Beginning Meter Reading) x 12/1000 - Divide by acres in field to get inches applied per acre</CardFooter>
                 </Card>
               </Col>
             </Row>
@@ -117,7 +127,7 @@ function App() {
         </TabContent>
       </div>
       <footer className="bg-secondary text-white" style={{bottom: "0", position: "absolute", width: "100%"}}>
-        <div class="footer-copyright text-center py-3">© 2019 Copyright - {" "}
+        <div className="footer-copyright text-center py-3">© 2019 Copyright - {" "}
           <a href="https://mirelescloud.com"><span className="text-white">MirelesCloud</span></a>
         </div>
       </footer>
@@ -131,16 +141,14 @@ function CanalPump() {
   const [acres, setAcres] = useState("")
   const [result, setResult] = useState(0)
   const [acreFeet, setAcreFeet] = useState(0)
-  const [acreInches, setAcreInches] = useState(0)
   const calculateTotal = () => {
     if (isNaN(acres)) {
       setResult("")
       
     }
     else {
-      setResult(((meterEnd-meterStart)*(12/1000))/acres)
-      setAcreFeet((meterEnd-meterStart)*(.001))
-      setAcreInches((meterEnd-meterStart)*(12/1000))
+      setResult(((meterEnd-meterStart)*(12/100))/acres)
+      setAcreFeet((meterEnd-meterStart)*(.01))
     }
   }
 
@@ -183,14 +191,10 @@ function CanalPump() {
                 boxShadow: "4px 4px 2px 1px rgba(0, 0 , 0, .2)"
               }}>
             <CardBody >
-              <CardText>
-              <h2>{(result).toFixed(1)} {" "} inches per acre</h2>
-              <h2>{(acreFeet).toFixed(1)} {" "} acre/feet</h2>
-              <h2>{(acreInches).toFixed(1)} {" "} acre/inches</h2>
-              <h2>{(acreFeet*gallons).toFixed(0).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')} gallons</h2>
-              </CardText>
+              <h4>{(result).toFixed(1)} {" "} inches per acre</h4>
+              <h4>{(acreFeet).toFixed(1)} {" "} acre/feet</h4>
             </CardBody>
-            <CardFooter className="text-muted">Meter Reading in Acre-Feet x .001: Water Pumped, Ac-In = (Ending Meter Reading - Beginning Meter Reading) x 12/1000 - Divide by acres in field to get inches applied per acre</CardFooter>
+            <CardFooter className="text-muted">Meter Reading in Acre-Feet x .01: Water Pumped, Ac-In = (Ending Meter Reading - Beginning Meter Reading) x 12/100 - Divide by acres in field to get inches applied per acre</CardFooter>
           </Card>
         </Col>
       </Row>
